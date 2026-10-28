@@ -1,38 +1,54 @@
-   1 #include <stdio.h>                                                                                                                                                                                            
-   2 #include <stdlib.h>                                                                                                                                                                                           
-   3 #include <time.h>                                                                                                                                                                                             
-   4 #include "gamelib.h"                                                                                                                                                                                          
-   5                                                                                                                                                                                                               
-   6 int main ()                                                                                                                                                                                                   
-   7 {                                                                                                                                                                                                             
-   8     int scelta = 0;                                                                                                                                                                                           
-   9                                                                                                                                                                                                               
-  10     printf("+--------------------------------------------------+\n");                                                                                                                                         
-  11     printf("|                   Falsophobia                    |\n");                                                                                                                                         
-  12     printf("+--------------------------------------------------+\n");                                                                                                                                         
-  13                                                                                                                                                                                                               
-  14  do{                                                                                                                                                                                                          
-  15                                                                                                                                                                                                               
-  16     printf ("+----------------------------+\n");                                                                                                                                                              
-  17     printf ("|      Menu' principale      |\n");                                                                                                                                                              
-  18     printf ("|     -Scegli un'opzione-    |\n");                                                                                                                                                              
-  19     printf ("+----------------------------+\n");                                                                                                                                                              
-  20                                                                                                                                                                                                               
-  21     printf ("+------Cosa vuoi fare?------+\n\n | 1 + Creazione della mappa |\n | 2 + Affronta lo spettro |\n 3 + Uscire dal gioco | \n");                                                                     
-  22     scanf ("%d", &scelta);                                                                                                                                                                                    
-  23     switch (scelta)                                                                                                                                                                                           
-  24         {                                                                                                                                                                                                     
-  25             case 1:                                                                                                                                                                                           
-  26                 Imposta_Gioco();                                                                                                                                                                              
-  27             break;                                                                                                                                                                                            
-  28             case 2:                                                                                                                                                                                           
-  29                 Gioca();                                                                                                                                                                                      
-  30             break;                                                                                                                                                                                            
-  31             case 3:                                                                                                                                                                                           
-  32                 Termina_Gioco();                                                                                                                                                                              
-  33             break;                                                                                                                                                                                            
-  34         }                                                                                                                                                                                                     
-  35  } while(scelta != 3);  //semplice controllo per togliere il menu                                                                                                                                             
-  36  return 0;                                                                                                                                                                                                    
-  37 }                                                                                                                                                                                                             
-                  
+#include "gamelib.h"
+
+int main(void){
+   time_t t; 
+   srand(time(&t));
+    unsigned short scelta = 0;
+
+    /*Voglio che il menu' stampi ogni volta il titolo del gioco, ma ovviamente prima chiamo la funzione clear per pulire lo schermo dal precendete*/
+    system("clear");
+    logo(); 
+    do
+    {
+     if (settato == false) /*Mi devo accertare che il gioco sia stato impostato almeno una singola volta, quindi mi interessa solo il caso negativo*/
+        printf("Prima di iniziare a giocare devi impostare il gioco almeno una volta!\n");
+        /*funzioni di stampaggio*/
+    printf("\t1 - Imposta il Dungeon\n");
+    printf("\t2 - Avventurati nel Dungeon\n");
+    printf("\t3 - Fuggi dal Dungeon\n");
+    scanf("%hu", &scelta);
+
+        switch (scelta)
+        {
+        case 1:
+            system("clear");
+            imposta_gioco();
+            break;
+
+        case 2:
+        if (settato){
+            system("clear");
+            gioca();
+        } else {
+            system("clear");
+            logo();
+            printROSSO("ATTENZIONE IL GIOCO NON E' STATO IMPOSTATO!\n");
+        }
+       gioca();
+        break;
+        
+        case 3:
+            system("clear");
+            termina();
+            break;
+
+        default:
+        system("clear");
+        printf("Il comando inserito non e' stato nemmeno pensato\n");
+        break;
+        }
+    }
+    while (scelta != 3 );
+    
+    return 0;
+}
